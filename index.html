@@ -3,197 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ioannis Kanakis - Player 1</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>Ioannis Kanakis - System Override</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0d0d0d;
-            --text-main: #33ff00; /* Neon Terminal Green */
-            --highlight: #ff00ff; /* Arcade Magenta */
-            --accent: #ffff00;    /* Pac-Man Yellow */
-            --border-color: #fff;
+            --term-green: #00ff00;
+            --term-cyan: #00ffff;
+            --term-magenta: #ff00ff;
+            --term-bg: #050505;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Press Start 2P', cursive;
-            line-height: 1.8;
+            background-color: var(--term-bg);
+            color: var(--term-green);
+            font-family: 'VT323', monospace;
             margin: 0;
-            padding: 20px;
-            font-size: 12px;
+            padding: 0;
+            overflow-x: hidden;
+            font-size: 1.2rem;
+            text-shadow: 0 0 4px var(--term-green);
         }
 
-        .game-container {
-            max-width: 800px;
+        /* The classic CRT scanline effect overlay */
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* 90s Cracktro Scroller */
+        .scroller-wrapper {
+            background-color: #002200;
+            border-top: 2px solid var(--term-green);
+            border-bottom: 2px solid var(--term-green);
+            padding: 5px 0;
+            margin-bottom: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 15px var(--term-green);
+        }
+
+        .scroller {
+            white-space: nowrap;
+            display: inline-block;
+            animation: scroll 20s linear infinite;
+            color: var(--term-cyan);
+            font-size: 1.5rem;
+            text-shadow: 0 0 5px var(--term-cyan);
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .terminal-container {
+            max-width: 900px;
             margin: 0 auto;
-            border: 4px solid var(--border-color);
-            padding: 30px;
-            box-shadow: 8px 8px 0px var(--highlight);
+            padding: 20px;
         }
 
-        /* Blinking cursor effect */
-        .cursor {
-            animation: blink 1s step-end infinite;
-        }
-        @keyframes blink { 50% { opacity: 0; } }
-
-        header {
+        /* ASCII Art Header */
+        .ascii-art {
+            color: var(--term-magenta);
+            text-shadow: 0 0 8px var(--term-magenta);
+            white-space: pre;
+            font-size: 1rem;
+            line-height: 1.2;
             text-align: center;
-            margin-bottom: 40px;
-            border-bottom: 4px dashed var(--text-main);
-            padding-bottom: 20px;
+            margin-bottom: 30px;
         }
 
-        h1 {
-            color: var(--accent);
-            font-size: 24px;
-            text-shadow: 3px 3px 0px #ff0000;
-            margin-bottom: 10px;
-            line-height: 1.4;
+        .prompt::before {
+            content: "root@kanakis:~# ";
+            color: var(--term-cyan);
+            text-shadow: 0 0 4px var(--term-cyan);
         }
 
         h2 {
-            color: var(--highlight);
-            font-size: 16px;
-            margin-top: 40px;
+            color: var(--term-cyan);
+            border-bottom: 1px dashed var(--term-cyan);
+            display: inline-block;
+            margin-top: 30px;
             text-transform: uppercase;
         }
-        
-        h2::before {
-            content: "> ";
-            color: var(--text-main);
+
+        .cmd-output {
+            margin-left: 20px;
+            border-left: 2px solid #004400;
+            padding-left: 15px;
         }
 
-        .job-title {
-            color: var(--accent);
-            font-size: 14px;
-            margin-bottom: 5px;
+        .highlight {
+            color: #fff;
+            text-shadow: 0 0 5px #fff;
         }
 
-        .company-info {
-            color: var(--border-color);
-            margin-bottom: 15px;
-            font-size: 10px;
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2rem;
+            background-color: var(--term-green);
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
         }
 
-        ul {
-            list-style-type: square;
-            padding-left: 20px;
-        }
-
-        li {
-            margin-bottom: 10px;
-        }
-
-        .skill-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .skill-category {
-            border: 2px solid var(--text-main);
-            padding: 15px;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            font-size: 10px;
-            color: var(--accent);
-            animation: blink 2s step-end infinite;
+        @keyframes blink { 
+            0%, 100% { opacity: 1; } 
+            50% { opacity: 0; } 
         }
 
         a {
-            color: var(--accent);
+            color: var(--term-magenta);
             text-decoration: none;
         }
+        
         a:hover {
-            color: var(--highlight);
-            text-decoration: underline;
-        }
-
-        /* Mobile responsiveness */
-        @media (max-width: 600px) {
-            .skill-grid {
-                grid-template-columns: 1fr;
-            }
-            h1 { font-size: 18px; }
+            background-color: var(--term-magenta);
+            color: var(--term-bg);
         }
     </style>
 </head>
 <body>
+    <div class="scanlines"></div>
 
-    <div class="game-container">
-        <header>
-            <h1>PLAYER 1: KANAKIS IOANNIS</h1>
-            <p style="color: var(--border-color);">CLASS: BI PROFESSIONAL LVL 20</p>
-            <p>COMM-LINK: john.kanakis@gmail.com</p>
-        </header>
-
-        <section>
-            <h2>CHARACTER STATS</h2>
-            <p>A highly competent IT professional specializing in Business Intelligence solutions. Results-oriented with high stats in problem-solving and a strategic mindset for organizing, governing, and optimizing data assets<span class="cursor">_</span></p>
-        </section>
-
-        <section>
-            <h2>QUEST LOG (EXPERIENCE)</h2>
-            
-            <div class="job">
-                <div class="job-title">BI TEAM LEADER - NUMERICS & SPORTS</div>
-                <div class="company-info">GUILD: OPAP S.A. | TIME: 2021 - PRESENT</div>
-                <ul>
-                    <li>Leading a high-performing team of data engineers, promoting agile delivery.</li>
-                    <li>Designing scalable cloud-based ELT/ETL pipelines (Azure Databricks, Synapse Analytics).</li>
-                </ul>
-            </div>
-
-            <div class="job">
-                <div class="job-title">SENIOR BI ENGINEER/ANALYST</div>
-                <div class="company-info">GUILD: OPAP S.A. | TIME: 2016 - 2021</div>
-                <ul>
-                    <li>Implemented the Numeric Games Data Warehouse for Greece and Cyprus.</li>
-                    <li>Delivered executive-level dashboards using Tableau and Power BI.</li>
-                </ul>
-            </div>
-            
-            <div class="job">
-                <div class="job-title">BI PROJECT LEADER</div>
-                <div class="company-info">GUILD: RELATIONAL FS | TIME: 2009 - 2016</div>
-                <ul>
-                    <li>Led end-to-end BI project delivery and managed technical teams.</li>
-                    <li>Reduced DW/BI implementation costs by at least 30% while minimizing technical debt.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section>
-            <h2>INVENTORY (SKILLS)</h2>
-            <div class="skill-grid">
-                <div class="skill-category">
-                    <p style="color: var(--highlight);">[ENGINEERING]</p>
-                    <p>Azure Synapse, Databricks, Informatica, SSIS</p>
-                </div>
-                <div class="skill-category">
-                    <p style="color: var(--highlight);">[LANGUAGES]</p>
-                    <p>Python, PySpark, SQL, C#</p>
-                </div>
-                <div class="skill-category">
-                    <p style="color: var(--highlight);">[DATABASES]</p>
-                    <p>SAP Sybase, Oracle, MS SQL Server, DB2</p>
-                </div>
-                <div class="skill-category">
-                    <p style="color: var(--highlight);">[REPORTING]</p>
-                    <p>Power BI, Tableau, SAP Business Objects</p>
-                </div>
-            </div>
-        </section>
-
-        <div class="footer">
-            PRESS START TO CONTACT
+    <div class="scroller-wrapper">
+        <div class="scroller">
+            *** Y0! WELCOME TO THE DIGITAL MAINFRAME OF KANAKIS IOANNIS *** BUSINESS INTELLIGENCE PROFESSIONAL *** GREETZ TO OPAP S.A. AND RELATIONAL FS *** DEPLOYING AZURE SYNAPSE PIPELINES AND CRUSHING DATA SILOS SINCE 2001 *** ENJOY THE DATASCAPE ***
         </div>
     </div>
 
+    <div class="terminal-container">
+        
+        <div class="ascii-art">
+  _  __  _    _  _  _    _  __  ___  ___  
+ | |/ / / \  | \| |/ \  | |/ / |_ _|/ __| 
+ | ' < / _ \ | .` / _ \ | ' <   | | \__ \ 
+ |_|\_/_/ \_\|_|\/_/ \_\|_|\_\ |___||___/ 
+        </div>
+
+        <div class="prompt">./execute_profile.sh</div>
+        <div class="cmd-output">
+            <p>> INITIALIZING <span class="highlight">BI PROFESSIONAL LVL MAX</span>...</p>
+            <p>> COMM-LINK: <a href="mailto:john.kanakis@gmail.com">john.kanakis@gmail.com</a></p>
+            <p>> STATUS: A highly competent IT professional specializing in Business Intelligence (BI) solutions. Governing and optimizing data assets with a strategic mindset.</p>
+        </div>
+
+        <h2><span class="prompt">cat /var/log/experience.log</span></h2>
+        <div class="cmd-output">
+            <p><span class="highlight">[2021 - PRESENT]</span> OPAP S.A. - BI Team Leader (Numerics & Sports)</p>
+            <p> - Leading data engineers, promoting agile delivery.</p>
+            <p> - Designing scalable cloud-based ELT/ETL pipelines (Azure Databricks, Synapse Analytics).</p>
+            <br>
+            <p><span class="highlight">[2016 - 2021]</span> OPAP S.A. - Senior BI Engineer/Analyst</p>
+            <p> - Implemented Numeric Games Data Warehouse for Greece/Cyprus.</p>
+            <p> - Delivered executive reports via Tableau, Power BI, SAP BO.</p>
+            <br>
+            <p><span class="highlight">[2009 - 2016]</span> Relational FS - BI Project Leader</p>
+            <p> - Led end-to-end BI delivery acting as technical/business interface.</p>
+            <p> - Reduced DW/BI implementation costs by >30%.</p>
+        </div>
+
+        <h2><span class="prompt">ls -la /usr/skills/</span></h2>
+        <div class="cmd-output">
+            <p><span class="highlight">drwxr-xr-x</span> ENGINEERING: Azure Synapse, Databricks, Informatica, SSIS</p>
+            <p><span class="highlight">drwxr-xr-x</span> DATABASES: SAP Sybase ASE/IQ, Oracle, MS SQL, DB2</p>
+            <p><span class="highlight">drwxr-xr-x</span> DEV_LANGS: Python, PySpark, SQL, C#, PHP</p>
+            <p><span class="highlight">drwxr-xr-x</span> REPORTING: Power BI, Tableau, SAP Business Objects</p>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <span class="prompt"></span><span class="cursor"></span>
+        </div>
+    </div>
 </body>
 </html>
