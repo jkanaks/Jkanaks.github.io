@@ -3,129 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ioannis Kanakis - Profile</title>
+    <title>Ioannis Kanakis - Player 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --text-main: #33ff00; /* Neon Terminal Green */
+            --highlight: #ff00ff; /* Arcade Magenta */
+            --accent: #ffff00;    /* Pac-Man Yellow */
+            --border-color: #fff;
+        }
+
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 900px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Press Start 2P', cursive;
+            line-height: 1.8;
+            margin: 0;
+            padding: 20px;
+            font-size: 12px;
+        }
+
+        .game-container {
+            max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px;
-            background-color: #f9f9f9;
+            border: 4px solid var(--border-color);
+            padding: 30px;
+            box-shadow: 8px 8px 0px var(--highlight);
         }
-        .container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+        /* Blinking cursor effect */
+        .cursor {
+            animation: blink 1s step-end infinite;
         }
+        @keyframes blink { 50% { opacity: 0; } }
+
         header {
-            border-bottom: 3px solid #2c3e50;
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 4px dashed var(--text-main);
             padding-bottom: 20px;
-            margin-bottom: 30px;
         }
+
         h1 {
-            color: #2c3e50;
-            margin: 0 0 10px 0;
-            font-size: 2.5em;
+            color: var(--accent);
+            font-size: 24px;
+            text-shadow: 3px 3px 0px #ff0000;
+            margin-bottom: 10px;
+            line-height: 1.4;
         }
-        .subtitle {
-            font-size: 1.2em;
-            color: #34495e;
-            font-weight: bold;
-            margin: 0 0 10px 0;
-        }
-        .contact {
-            color: #7f8c8d;
-            font-size: 0.9em;
-        }
+
         h2 {
-            color: #2980b9;
-            margin-top: 30px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
+            color: var(--highlight);
+            font-size: 16px;
+            margin-top: 40px;
+            text-transform: uppercase;
         }
-        .job {
-            margin-bottom: 25px;
+        
+        h2::before {
+            content: "> ";
+            color: var(--text-main);
         }
+
         .job-title {
-            font-weight: bold;
-            font-size: 1.1em;
-            color: #2c3e50;
+            color: var(--accent);
+            font-size: 14px;
+            margin-bottom: 5px;
         }
-        .company {
-            font-style: italic;
-            color: #7f8c8d;
+
+        .company-info {
+            color: var(--border-color);
+            margin-bottom: 15px;
+            font-size: 10px;
         }
+
         ul {
+            list-style-type: square;
             padding-left: 20px;
         }
+
         li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .skill-category {
+            border: 2px solid var(--text-main);
+            padding: 15px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 10px;
+            color: var(--accent);
+            animation: blink 2s step-end infinite;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        a:hover {
+            color: var(--highlight);
+            text-decoration: underline;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 600px) {
+            .skill-grid {
+                grid-template-columns: 1fr;
+            }
+            h1 { font-size: 18px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+
+    <div class="game-container">
         <header>
-            <h1>Kanakis Ioannis </h1>
-            <p class="subtitle">Business Intelligence Professional </p>
-            <p class="contact">john.kanakis@gmail.com  | +30 6947600274 </p>
+            <h1>PLAYER 1: KANAKIS IOANNIS</h1>
+            <p style="color: var(--border-color);">CLASS: BI PROFESSIONAL LVL 20</p>
+            <p>COMM-LINK: john.kanakis@gmail.com</p>
         </header>
 
         <section>
-            <h2>Professional Profile</h2>
-            <p>A highly competent IT professional who specializes in Business Intelligence (BI) solutions.  Results oriented with sharp skills in problem solving and a strategic mindset for organizing, governing, and optimizing data assets. [cite: 3] Applies a blend of leadership and technical skills to ensure teams deliver the BI solutions the business requires. [cite: 4]</p>
+            <h2>CHARACTER STATS</h2>
+            <p>A highly competent IT professional specializing in Business Intelligence solutions. Results-oriented with high stats in problem-solving and a strategic mindset for organizing, governing, and optimizing data assets<span class="cursor">_</span></p>
         </section>
 
         <section>
-            <h2>Experience</h2>
+            <h2>QUEST LOG (EXPERIENCE)</h2>
             
             <div class="job">
-                <div class="job-title">BI Team Leader - Numerics & Sports [cite: 5]</div>
-                <div class="company">OPAP S.A. | 2021 – Present [cite: 5]</div>
+                <div class="job-title">BI TEAM LEADER - NUMERICS & SPORTS</div>
+                <div class="company-info">GUILD: OPAP S.A. | TIME: 2021 - PRESENT</div>
                 <ul>
-                    <li>Lead and mentor a high-performing team of data engineers, promoting knowledge sharing, agile delivery, and continuous improvement. [cite: 8]</li>
-                    <li>Oversee the design and implementation of scalable cloud-based ELT/ETL pipelines leveraging Azure Databricks, Azure Synapse Analytics, and Azure Data Factory. </li>
+                    <li>Leading a high-performing team of data engineers, promoting agile delivery.</li>
+                    <li>Designing scalable cloud-based ELT/ETL pipelines (Azure Databricks, Synapse Analytics).</li>
                 </ul>
             </div>
 
             <div class="job">
-                <div class="job-title">Senior BI Engineer/Analyst [cite: 10]</div>
-                <div class="company">OPAP S.A. | 2016 – 2021 [cite: 5]</div>
+                <div class="job-title">SENIOR BI ENGINEER/ANALYST</div>
+                <div class="company-info">GUILD: OPAP S.A. | TIME: 2016 - 2021</div>
                 <ul>
-                    <li>Designed and implemented the Numeric Games Data Warehouse for both Greece and Cyprus, consolidating data from diverse gaming platforms into a single source of truth to support reporting and analysis. [cite: 13]</li>
-                    <li>Delivered executive-level reports using Tableau, Power BI, and SAP BusinessObjects, significantly enhancing decision-making capabilities and business visibility. [cite: 14]</li>
+                    <li>Implemented the Numeric Games Data Warehouse for Greece and Cyprus.</li>
+                    <li>Delivered executive-level dashboards using Tableau and Power BI.</li>
                 </ul>
             </div>
             
             <div class="job">
-                <div class="job-title">BI Project Leader [cite: 15]</div>
-                <div class="company">Relational FS | 2009 – 2016 [cite: 5]</div>
+                <div class="job-title">BI PROJECT LEADER</div>
+                <div class="company-info">GUILD: RELATIONAL FS | TIME: 2009 - 2016</div>
                 <ul>
-                    <li>Led end-to-end BI project delivery, ensuring timely and cost-effective execution while acting as a key interface between technical teams and business stakeholders. [cite: 15]</li>
-                    <li>Co-developed a framework that enables the company to reduce implementation costs for DW/BI solutions, by at least 30%, while minimizing technical debt. [cite: 17]</li>
+                    <li>Led end-to-end BI project delivery and managed technical teams.</li>
+                    <li>Reduced DW/BI implementation costs by at least 30% while minimizing technical debt.</li>
                 </ul>
             </div>
         </section>
 
         <section>
-            <h2>Technical Skills</h2>
-            <ul>
-                <li><strong>Engineering:</strong> Azure Synapse Analytics / ADF / Databricks / Informatica PowerCenter / SSIS / SSAS </li>
-                <li><strong>RDBMS:</strong> SAP Sybase ASE / SAP Sybase IQ / Oracle / MS SQL Server / IBM DB2 </li>
-                <li><strong>Development:</strong> Python/PySpark/SQL/C#/VB.NET/PHP </li>
-            </ul>
+            <h2>INVENTORY (SKILLS)</h2>
+            <div class="skill-grid">
+                <div class="skill-category">
+                    <p style="color: var(--highlight);">[ENGINEERING]</p>
+                    <p>Azure Synapse, Databricks, Informatica, SSIS</p>
+                </div>
+                <div class="skill-category">
+                    <p style="color: var(--highlight);">[LANGUAGES]</p>
+                    <p>Python, PySpark, SQL, C#</p>
+                </div>
+                <div class="skill-category">
+                    <p style="color: var(--highlight);">[DATABASES]</p>
+                    <p>SAP Sybase, Oracle, MS SQL Server, DB2</p>
+                </div>
+                <div class="skill-category">
+                    <p style="color: var(--highlight);">[REPORTING]</p>
+                    <p>Power BI, Tableau, SAP Business Objects</p>
+                </div>
+            </div>
         </section>
-        
-        <section>
-            <h2>Education</h2>
-            <ul>
-                <li><strong>National and Kapodistrian University of Athens:</strong> Executive MBA (2023-2026) [cite: 31]</li>
-                <li><strong>Hellenic Open University:</strong> Bachelor of Science in Computer Science (2017-2023) [cite: 31]</li>
-            </ul>
-        </section>
+
+        <div class="footer">
+            PRESS START TO CONTACT
+        </div>
     </div>
+
 </body>
 </html>
