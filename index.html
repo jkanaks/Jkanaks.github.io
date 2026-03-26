@@ -3,271 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ioannis Kanakis - Modern Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Ioannis Kanakis // Data_Core</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        /* CSS Reset & Base Styles */
+        :root {
+            --bg-base: #030712;
+            --text-main: #9ca3af;
+            --neon-cyan: #00f0ff;
+            --neon-cyan-dim: rgba(0, 240, 255, 0.15);
+            --card-bg: rgba(17, 24, 39, 0.7);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body, html {
-            height: 100%;
-            font-family: 'Open Sans', sans-serif;
-            color: #333;
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: 'Fira Code', monospace;
             line-height: 1.6;
-            background-color: #f4f7f6;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-        }
-
-        /* Parallax Background Utility Classes */
-        .parallax {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
+            min-height: 100vh;
         }
 
-        /* Dark overlay to make text readable over images */
-        .parallax-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(15, 23, 42, 0.7); /* Deep modern blue/gray */
-            z-index: 1;
+        /* Subtle Data Grid Background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
+            pointer-events: none;
         }
 
-        .parallax-content {
-            position: relative;
-            z-index: 2;
-            padding: 0 20px;
-        }
-
-        /* Specific Parallax Sections */
-        .parallax-1 {
-            /* High-quality abstract data/tech image */
-            background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1920&q=80');
-            min-height: 100vh; /* Full viewport height for hero section */
-        }
-
-        .parallax-2 {
-            /* Global network/earth image */
-            background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80');
-            min-height: 400px;
-        }
-
-        /* Content Sections */
-        .content-section {
-            padding: 80px 20px;
-            max-width: 1000px;
+        .container {
+            max-width: 900px;
             margin: 0 auto;
+            padding: 60px 20px;
         }
 
-        .content-section h2 {
-            font-size: 2.5rem;
-            color: #0f172a;
-            margin-bottom: 20px;
-            text-align: center;
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Rajdhani', sans-serif;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
-        .content-section h2::after {
+        header {
+            border-bottom: 1px solid var(--neon-cyan-dim);
+            padding-bottom: 40px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        header::after {
             content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: #3b82f6; /* Modern primary blue */
-            margin: 15px auto 40px;
-            border-radius: 2px;
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: var(--neon-cyan);
+            box-shadow: 0 0 10px var(--neon-cyan);
         }
 
-        .profile-text {
+        h1 {
+            color: #ffffff;
+            font-size: 3.5rem;
+            margin-bottom: 5px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .subtitle {
+            color: var(--neon-cyan);
             font-size: 1.2rem;
-            text-align: center;
-            color: #475569;
-            max-width: 800px;
-            margin: 0 auto;
+            margin-bottom: 15px;
+            font-weight: 500;
         }
 
-        /* Experience Cards */
-        .timeline {
-            display: grid;
-            gap: 30px;
+        .contact-info {
+            font-size: 0.85rem;
+            opacity: 0.7;
         }
 
-        .card {
-            background: #fff;
-            border-radius: 12px;
+        .contact-info span {
+            margin-right: 15px;
+        }
+
+        h2 {
+            color: #ffffff;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h2::before {
+            content: "[";
+            color: var(--neon-cyan);
+        }
+        h2::after {
+            content: "]";
+            color: var(--neon-cyan);
+        }
+
+        p {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* Glassmorphism Cards for Experience */
+        .data-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-left: 3px solid var(--neon-cyan-dim);
             padding: 30px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-left: 5px solid #3b82f6;
+            margin-bottom: 25px;
+            border-radius: 4px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        .data-card:hover {
+            border-left: 3px solid var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.05);
+            transform: translateX(5px);
         }
 
-        .card h3 {
-            color: #0f172a;
-            font-size: 1.5rem;
+        .data-card h3 {
+            color: var(--neon-cyan);
+            font-size: 1.4rem;
             margin-bottom: 5px;
         }
 
-        .card .meta {
-            color: #64748b;
-            font-size: 0.95rem;
+        .meta {
+            font-size: 0.8rem;
+            color: #6b7280;
             margin-bottom: 15px;
-            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .card ul {
+        .data-card ul {
+            list-style: none;
+        }
+
+        .data-card li {
+            position: relative;
             padding-left: 20px;
-            color: #475569;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
         }
 
-        .card li {
-            margin-bottom: 8px;
+        .data-card li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: var(--neon-cyan);
+            font-size: 0.8rem;
         }
 
-        /* Skills Grid */
-        .skills-container {
+        /* Cyberpunk Skill Tags */
+        .skills-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
+            gap: 12px;
         }
 
         .skill-tag {
-            background: #e2e8f0;
-            color: #0f172a;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: background 0.3s ease, color 0.3s ease;
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--neon-cyan-dim);
+            padding: 8px 15px;
+            font-size: 0.85rem;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            cursor: default;
         }
 
         .skill-tag:hover {
-            background: #3b82f6;
-            color: #fff;
+            background: var(--neon-cyan-dim);
+            color: var(--neon-cyan);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
         }
 
-        /* Header Text Formatting */
-        .hero-title {
-            font-size: 4rem;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
+        /* Blinking cursor for the intro */
+        .blink {
+            animation: blinker 1s linear infinite;
+            color: var(--neon-cyan);
         }
 
-        .hero-subtitle {
-            font-size: 1.5rem;
-            font-weight: 300;
-            margin-bottom: 30px;
-            color: #cbd5e1;
-        }
-
-        .hero-contact {
-            font-size: 1rem;
-            color: #94a3b8;
-        }
-
-        /* Mobile adjustments */
-        @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; }
-            .hero-subtitle { font-size: 1.2rem; }
-            .parallax { background-attachment: scroll; } /* Fix for iOS parallax bug */
+        @keyframes blinker {
+            50% { opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <div class="parallax parallax-1">
-        <div class="parallax-overlay"></div>
-        <div class="parallax-content">
-            <h1 class="hero-title">Kanakis Ioannis</h1>
-            <h2 class="hero-subtitle">Business Intelligence Professional</h2>
-            <p class="hero-contact">john.kanakis@gmail.com | +30 6947600274</p>
-        </div>
-    </div>
-
-    <div class="content-section">
-        <h2>Professional Profile</h2>
-        <p class="profile-text">
-            A highly competent IT professional who specializes in Business Intelligence (BI) solutions. With a proven track record of successfully delivering robust solutions in a plethora of technical ecosystems. Results oriented with sharp skills in problem solving and a strategic mindset for organizing, governing, and optimizing data assets. Applies a blend of leadership and technical skills to ensure teams deliver the BI solutions the business requires.
-        </p>
-    </div>
-
-    <div class="parallax parallax-2">
-        <div class="parallax-overlay"></div>
-        <div class="parallax-content">
-            <h2 style="font-size: 2rem; letter-spacing: 3px;">Driving Data Strategy</h2>
-        </div>
-    </div>
-
-    <div class="content-section" style="background-color: #f8fafc; max-width: 100%;">
-        <div style="max-width: 1000px; margin: 0 auto;">
-            <h2>Experience</h2>
-            <div class="timeline">
-                
-                <div class="card">
-                    <h3>BI Team Leader - Numerics & Sports</h3>
-                    <div class="meta">OPAP S.A. | 2021 – Present</div>
-                    <ul>
-                        <li>Lead and mentor a high-performing team of data engineers, promoting knowledge sharing, agile delivery, and continuous improvement.</li>
-                        <li>Oversee the design and implementation of scalable cloud-based ELT/ETL pipelines leveraging Azure Databricks, Azure Synapse Analytics, and Azure Data Factory.</li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h3>Senior BI Engineer/Analyst</h3>
-                    <div class="meta">OPAP S.A. | 2016 – 2021</div>
-                    <ul>
-                        <li>Designed and implemented the Numeric Games Data Warehouse for both Greece and Cyprus, consolidating data from diverse gaming platforms.</li>
-                        <li>Delivered executive-level reports using Tableau, Power BI, and SAP BusinessObjects, significantly enhancing decision-making capabilities.</li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h3>BI Project Leader</h3>
-                    <div class="meta">Relational FS | 2009 – 2016</div>
-                    <ul>
-                        <li>Led end-to-end BI project delivery, ensuring timely and cost-effective execution.</li>
-                        <li>Co-developed a framework that enables the company to reduce implementation costs for DW/BI solutions by at least 30%.</li>
-                    </ul>
-                </div>
-
+    <div class="container">
+        <header>
+            <h1>Kanakis Ioannis</h1>
+            <div class="subtitle">SYS.ROLE: Business Intelligence Professional</div>
+            <div class="contact-info">
+                <span>DATALINK: john.kanakis@gmail.com</span>
+                <span>NODE: +30 6947600274</span>
             </div>
-        </div>
-    </div>
+        </header>
 
-    <div class="content-section">
-        <h2>Technical Arsenal</h2>
-        <div class="skills-container">
-            <span class="skill-tag">Azure Synapse</span>
-            <span class="skill-tag">Azure Data Factory</span>
-            <span class="skill-tag">Databricks</span>
-            <span class="skill-tag">Python & PySpark</span>
-            <span class="skill-tag">SQL</span>
-            <span class="skill-tag">Power BI</span>
-            <span class="skill-tag">Tableau</span>
-            <span class="skill-tag">SAP BusinessObjects</span>
-            <span class="skill-tag">Informatica PowerCenter</span>
-            <span class="skill-tag">Oracle & MS SQL</span>
-        </div>
+        <section style="margin-bottom: 60px;">
+            <h2>System_Profile</h2>
+            <div class="data-card" style="border-left-color: var(--neon-cyan);">
+                <p>A highly competent IT professional who specializes in Business Intelligence (BI) solutions. With a proven track record of successfully delivering robust solutions in a plethora of technical ecosystems.</p>
+                <p>Results oriented with sharp skills in problem solving and a strategic mindset for organizing, governing, and optimizing data assets. Applies a blend of leadership and technical skills to ensure teams deliver the BI solutions the business requires<span class="blink">_</span></p>
+            </div>
+        </section>
+
+        <section style="margin-bottom: 60px;">
+            <h2>Execution_Logs</h2>
+            
+            <div class="data-card">
+                <h3>BI Team Leader - Numerics & Sports</h3>
+                <div class="meta">OPAP S.A. // 2021 – Present</div>
+                <ul>
+                    <li>Lead and mentor a high-performing team of data engineers, promoting knowledge sharing, agile delivery, and continuous improvement.</li>
+                    <li>Oversee the design and implementation of scalable cloud-based ELT/ETL pipelines leveraging Azure Databricks, Azure Synapse Analytics, and Azure Data Factory.</li>
+                </ul>
+            </div>
+
+            <div class="data-card">
+                <h3>Senior BI Engineer/Analyst</h3>
+                <div class="meta">OPAP S.A. // 2016 – 2021</div>
+                <ul>
+                    <li>Designed and implemented the Numeric Games Data Warehouse for both Greece and Cyprus, consolidating data from diverse gaming platforms.</li>
+                    <li>Delivered executive-level reports using Tableau, Power BI, and SAP BusinessObjects, significantly enhancing decision-making capabilities.</li>
+                </ul>
+            </div>
+
+            <div class="data-card">
+                <h3>BI Project Leader</h3>
+                <div class="meta">Relational FS // 2009 – 2016</div>
+                <ul>
+                    <li>Led end-to-end BI project delivery, ensuring timely and cost-effective execution.</li>
+                    <li>Co-developed a framework that enables the company to reduce implementation costs for DW/BI solutions by at least 30%, while minimizing technical debt.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Tech_Arsenal</h2>
+            <div class="skills-grid">
+                <div class="skill-tag">Azure Synapse</div>
+                <div class="skill-tag">Databricks</div>
+                <div class="skill-tag">Azure Data Factory</div>
+                <div class="skill-tag">Python</div>
+                <div class="skill-tag">PySpark</div>
+                <div class="skill-tag">SQL</div>
+                <div class="skill-tag">Power BI</div>
+                <div class="skill-tag">Tableau</div>
+                <div class="skill-tag">SAP Sybase IQ</div>
+                <div class="skill-tag">Informatica</div>
+            </div>
+        </section>
     </div>
 
 </body>
